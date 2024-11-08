@@ -1,0 +1,32 @@
+edition = "2021"
+unstable_features = true
+
+# 基础格式设置
+max_width = 100
+hard_tabs = false
+tab_spaces = 4
+newline_style = "Unix"
+use_small_heuristics = "Default"
+
+# 宽度控制
+fn_call_width = 90
+chain_width = 80
+comment_width = 80
+
+# 注释处理
+wrap_comments = true
+normalize_comments = true
+format_code_in_doc_comments = true
+normalize_doc_attributes = true
+
+# 导入和模块
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+reorder_imports = true
+reorder_modules = true
+
+# 代码组织
+combine_control_expr = false
+enum_discrim_align_threshold = 60
+format_macro_matchers = true
+reorder_impl_items = true

@@ -1,0 +1,17 @@
+[package]
+name = "axum"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "axum"
+
+[dependencies]
+common = { path = "../common" }
+
+axum = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }

@@ -1,0 +1,17 @@
+[package]
+name = "warp"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "warp"
+
+[dependencies]
+common = { path = "../common" }
+
+warp = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }

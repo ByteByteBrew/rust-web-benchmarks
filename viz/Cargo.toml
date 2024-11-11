@@ -1,0 +1,17 @@
+[package]
+name = "viz"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "viz"
+
+[dependencies]
+common = { path = "../common" }
+
+viz = { workspace = true, features = ["json"] }
+
+tokio = { workspace = true }
+serde = { workspace = true }

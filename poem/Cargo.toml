@@ -1,0 +1,17 @@
+[package]
+name = "poem"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "poem"
+
+[dependencies]
+common = { path = "../common" }
+
+poem = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }

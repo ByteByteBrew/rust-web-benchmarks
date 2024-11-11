@@ -1,0 +1,17 @@
+[package]
+name = "ohkami"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "ohkami"
+
+[dependencies]
+common = { path = "../common" }
+
+ohkami = { workspace = true, features = ["rt_tokio"] }
+
+tokio = { workspace = true }
+serde = { workspace = true }

@@ -6,7 +6,21 @@ edition = "2021"
 [workspace]
 members = [
     "common",
-    "axum"
+    "axum",
+    "actix-web",
+    "warp",
+    "poem",
+    "rocket",
+    "salvo",
+    "may_minihttp",
+    "ohkami",
+    "viz",
+    "graphul",
+    "gotham",
+    "iron",
+    "xitca-web",
+    "ntex",
+    "argan",
 ]
 
 [profile.release]
@@ -34,7 +48,7 @@ h2 = "0.4.6"
 rand = "0.8.5"
 futures = "0.3.31"
 sqlx = { version = "0.8.2", features = ["runtime-tokio-rustls", "sqlite"] }
-criterion = { version = "0.5.1", features = ["async_tokio"] }
+hyper-util = "0.1.10"
 
 # Web Frameworks
 actix-web = "4.9.0"

@@ -1,0 +1,17 @@
+[package]
+name = "rocket"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "rocket"
+
+[dependencies]
+common = { path = "../common" }
+
+rocket = { workspace = true, features = ["json"] }
+
+tokio = { workspace = true }
+serde = { workspace = true }

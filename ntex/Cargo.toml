@@ -1,0 +1,17 @@
+[package]
+name = "ntex"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "ntex"
+
+[dependencies]
+common = { path = "../common" }
+
+ntex = { workspace = true, features = ["tokio"] }
+
+tokio = { workspace = true }
+serde = { workspace = true }

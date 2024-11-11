@@ -1,0 +1,18 @@
+[package]
+name = "gotham"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "gotham"
+
+[dependencies]
+common = { path = "../common" }
+
+gotham = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

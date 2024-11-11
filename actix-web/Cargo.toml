@@ -1,0 +1,17 @@
+[package]
+name = "actix-web"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "actix-web"
+
+[dependencies]
+common = { path = "../common" }
+
+actix-web = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }

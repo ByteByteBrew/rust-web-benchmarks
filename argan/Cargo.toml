@@ -1,0 +1,18 @@
+[package]
+name = "argan"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "argan"
+
+[dependencies]
+common = { path = "../common" }
+
+argan = { workspace = true }
+
+hyper-util = { workspace = true, features = ["server-auto", "tokio"] }
+serde = { workspace = true, features = ["derive"] }
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

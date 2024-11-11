@@ -479,6 +479,86 @@ fn print_results(results: &[BenchmarkResult]) {
     }
 }
 
+/// 生成 Markdown 格式的测试报告
+///
+/// # Arguments
+/// * `results` - 测试结果集合
+fn generate_markdown_report(results: &[BenchmarkResult]) -> Result<()> {
+    let mut content = String::new();
+
+    // 添加标题和说明
+    content.push_str("# Web 框架基准测试报告\n\n");
+    content.push_str("## 测试环境\n");
+    content
+        .push_str(&format!("- 测试时间: {}\n", chrono::Local::now().format("%Y-%m-%d %H:%M:%S")));
+    content.push_str(&format!("- 并发用户数: {}\n", results[0].concurrency));
+    content.push_str("- 测试端点: `/plaintext`, `/json`, `/fortunes`\n\n");
+
+    // 按框架分组
+    let frameworks: Vec<_> = results
+        .iter()
+        .map(|r| &r.framework)
+        .collect::<std::collections::HashSet<_>>()
+        .into_iter()
+        .collect();
+
+    for framework in frameworks {
+        content.push_str(&format!("## {} 框架\n\n", framework));
+
+        // 按端点分组
+        let endpoints: Vec<_> = results
+            .iter()
+            .filter(|r| r.framework == *framework)
+            .map(|r| &r.endpoint)
+            .collect::<std::collections::HashSet<_>>()
+            .into_iter()
+            .collect();
+
+        for endpoint in endpoints {
+            content.push_str(&format!("### {} 端点\n\n", endpoint));
+
+            // 表头
+            content.push_str("| 轮次 | 并发数 | 请求/秒 | 平均延迟(ms) | P90延迟(ms) | 最大延迟(ms) | CPU使用率(%) | 内存使用(MB) |\n");
+            content.push_str("|------|--------|----------|--------------|-------------|--------------|--------------|---------------|\n");
+
+            // 按轮次排序的结果
+            let round_results: Vec<_> = results
+                .iter()
+                .filter(|r| r.framework == *framework && r.endpoint == *endpoint)
+                .collect();
+
+            for result in round_results {
+                content.push_str(&format!(
+                    "| 第{}轮 | {} | {:.0} | {:.2} | {:.2} | {:.2} | {:.1}/{:.1}/{:.1} | {:.1}/{:.1}/{:.1} |\n",
+                    result.round,
+                    result.concurrency,
+                    result.requests_per_sec,
+                    result.latency_avg,
+                    result.latency_p90,
+                    result.latency_max,
+                    result.cpu_min,
+                    result.cpu_max,
+                    result.cpu_avg,
+                    result.mem_min,
+                    result.mem_max,
+                    result.mem_avg
+                ));
+            }
+            content.push_str("\n");
+
+            // 添加说明
+            content.push_str("- CPU使用率显示为: 最小值/最大值/平均值\n");
+            content.push_str("- 内存使用显示为: 最小值/最大值/平均值\n\n");
+        }
+    }
+
+    // 写入文件
+    std::fs::write("benchmark_results.md", content)?;
+    println!("\n📝 测试报告已生成: benchmark_results.md");
+
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     // 加载配置
@@ -502,5 +582,6 @@ async fn main() -> Result<()> {
 
     // 输出结果
     print_results(&all_results);
+    generate_markdown_report(&all_results)?;
     Ok(())
 }

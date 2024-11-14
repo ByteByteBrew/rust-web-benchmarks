@@ -2,6 +2,8 @@
 name = "rust-web-benchmarks"
 version = "0.1.0"
 edition = "2021"
+authors = ["wang1571339199@outlook.com"]
+publish = false
 
 [workspace]
 members = [
@@ -32,7 +34,7 @@ panic = "abort"
 incremental = false
 codegen-units = 1
 rpath = false
-strip = false
+strip = "symbols"
 
 [workspace.package]
 authors = ["wang1571339199@outlook.com"]
@@ -40,40 +42,61 @@ publish = false
 version = "0.1.0"
 edition = "2021"
 
+# ********** 核心运行时依赖 **********
 [workspace.dependencies]
 tokio = { version = "1.41.1", features = ["full"] }
-serde = { version = "1.0.214", features = ["derive"] }
-serde_json = "1.0.132"
-h2 = "0.4.6"
-rand = "0.8.5"
-futures = "0.3.31"
-sqlx = { version = "0.8.2", features = ["runtime-tokio-rustls", "sqlite"] }
-hyper-util = "0.1.10"
-bytes = "1.8.0"
 
-# Web Frameworks
-actix-web = "4.9.0"
-warp = "0.3.7"
+# ********** HTTP 底层依赖 **********
+hyper-util = "0.1"
+bytes = "1.8"
+
+# ********** 序列化/反序列化 **********
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.132"
+toml = "0.8.19"
+
+# ********** 数据库相关 **********
+# sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "sqlite"] }
+
+# ********** 工具库 **********
+anyhow = "1.0.93"
+thiserror = "2.0.3"
+chrono = "0.4.38"
+colored = "2.1.0"
+sysinfo = "0.32.0"
+async-trait = "0.1.83"
+
+# ********** Web 框架 **********
+# 基于 hyper
 axum = "0.7.7"
+warp = "0.3.7"
+salvo = "0.74.2"
+
+# 基于 actix-rt
+actix-web = "4.9.0"
+ntex = "2.8.0"
+
+# 基于 tokio
 poem = "3.1.3"
 rocket = "0.5.1"
-salvo = "0.74.1"
+gotham = "0.7.4"
+
+# 其他运行时
 may_minihttp = "0.1.11"
 ohkami = "0.20.0"
 viz = "0.9.0"
 graphul = "1.0.1"
-gotham = "0.7.4"
 iron = "0.6.1"
 xitca-web = "0.6.2"
-ntex = "2.8.0"
 argan = "0.1.2"
 
 [dependencies]
-tokio = { version = "1.41.0", features = ["full"] }
-anyhow = "1.0.93"
-serde = { version = "1.0.214", features = ["derive"] }
-serde_json = "1.0.132"
-colored = "2.1.0"
-sysinfo = "0.32.0"
-toml = "0.8.19"
-chrono = "0.4.38"
+tokio = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+colored = { workspace = true }
+sysinfo = { workspace = true }
+toml = { workspace = true }
+chrono = { workspace = true }
+async-trait = { workspace = true }
+thiserror = { workspace = true }

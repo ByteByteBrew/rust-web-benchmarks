@@ -9,13 +9,39 @@ use crate::{traits::MetricsCollector, types::ResourceStats};
 
 pub struct SystemMetricsCollector {
     system: System,
+    cpu_cores: usize,
+    cpu_name: String,
+    total_memory: u64,
 }
 
 impl SystemMetricsCollector {
     pub fn new() -> Self {
+        let mut system = System::new_all();
+        system.refresh_all();
+        let cpu_cores = system.cpus().len();
+        let cpu_name = system
+            .cpus()
+            .first()
+            .map(|cpu| cpu.brand().to_string())
+            .unwrap_or_else(|| "Unknown CPU".to_string());
+        let total_memory = system.total_memory() / 1024 / 1024; // Convert to MB
         Self {
-            system: System::new(),
+            system,
+            cpu_cores,
+            cpu_name,
+            total_memory,
         }
+    }
+
+    pub fn hardware_info(&self) -> String {
+        format!(
+            "- CPU: {} ({} cores)\n- Memory: {} MB",
+            self.cpu_name, self.cpu_cores, self.total_memory,
+        )
+    }
+
+    pub fn cpu_cores(&self) -> usize {
+        self.cpu_cores
     }
 }
 

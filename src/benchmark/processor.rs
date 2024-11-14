@@ -3,13 +3,17 @@ use std::{collections::HashMap, io::Write};
 use anyhow::Result;
 use colored::*;
 
-use crate::{traits::ResultsProcessor, types::BenchmarkResult};
+use crate::{services::SystemMetricsCollector, traits::ResultsProcessor, types::BenchmarkResult};
 
-pub struct DefaultResultsProcessor;
+pub struct DefaultResultsProcessor {
+    metrics_collector: SystemMetricsCollector,
+}
 
 impl DefaultResultsProcessor {
     pub fn new() -> Self {
-        Self
+        Self {
+            metrics_collector: SystemMetricsCollector::new(),
+        }
     }
 
     fn format_resources(&self, stats: &crate::types::ResourceStats) -> String {
@@ -89,7 +93,7 @@ impl ResultsProcessor for DefaultResultsProcessor {
         writeln!(file, "# Web Framework Benchmark Results\n")?;
         writeln!(file, "## Test Configuration\n")?;
         writeln!(file, "- Date: {}", chrono::Local::now().format("%Y-%m-%d %H:%M:%S"))?;
-        writeln!(file, "- Hardware: TODO - Add system info\n")?;
+        writeln!(file, "## Hardware Information\n{}\n", self.metrics_collector.hardware_info())?;
 
         for ((concurrency, endpoint), results) in grouped.iter() {
             writeln!(file, "## Results for {} concurrent users at {}\n", concurrency, endpoint)?;

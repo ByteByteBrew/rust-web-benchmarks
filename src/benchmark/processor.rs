@@ -16,17 +16,16 @@ impl DefaultResultsProcessor {
     }
 
     fn generate_table_header(&self, endpoints: &[String]) -> String {
-        let mut header = "| Rank | Framework ".to_string();
+        let mut header = "| Rank ".to_string();
         for endpoint in endpoints {
             header.push_str(&format!("| {} ", endpoint));
         }
-        header.push_str("| Concurrency |");
+        header.push('|');
 
-        let mut separator = "|------|-----------|".to_string();
+        let mut separator = "|------|".to_string();
         for _ in endpoints {
-            separator.push_str("-----------|");
+            separator.push_str("-----------------|");
         }
-        separator.push_str("------------|");
 
         format!("{}\n{}", header, separator)
     }
@@ -34,27 +33,30 @@ impl DefaultResultsProcessor {
     fn format_row(
         &self,
         rank: usize,
-        framework: &str,
-        endpoint_results: &HashMap<String, f64>,
+        endpoint_results: &HashMap<String, Vec<(String, f64)>>,
         endpoints: &[String],
-        concurrency: usize,
     ) -> String {
-        let mut row = format!("| {:4} | {:9} ", rank, framework);
+        let mut row = format!("| {:4} ", rank);
 
         for endpoint in endpoints {
-            row.push_str(&format!("| {:9.0} ", endpoint_results.get(endpoint).unwrap_or(&0.0)));
+            if let Some(results) = endpoint_results.get(endpoint) {
+                if let Some((framework, rps)) = results.get(rank - 1) {
+                    row.push_str(&format!("| {:9} {:9.0} ", framework, rps));
+                } else {
+                    row.push_str("|                  ");
+                }
+            }
         }
 
-        row.push_str(&format!("| {:10} |", concurrency));
+        row.push('|');
         row
     }
 
     fn process_results(
         &self,
         results: &[BenchmarkResult],
-    ) -> (Vec<String>, HashMap<usize, Vec<(String, HashMap<String, f64>)>>) {
-        let mut concurrency_groups: HashMap<usize, Vec<(String, HashMap<String, f64>)>> =
-            HashMap::new();
+    ) -> (Vec<String>, HashMap<usize, HashMap<String, Vec<(String, f64)>>>) {
+        let mut concurrency_groups = HashMap::new();
         let mut endpoints = Vec::new();
 
         for result in results {
@@ -64,28 +66,20 @@ impl DefaultResultsProcessor {
         }
         endpoints.sort();
 
-        let mut temp_results: HashMap<(String, usize), HashMap<String, f64>> = HashMap::new();
-
         for result in results {
-            let key = (result.framework.clone(), result.concurrency);
-            let framework_results = temp_results.entry(key).or_default();
-            framework_results.insert(result.endpoint.clone(), result.metrics.req_per_sec);
+            let endpoint_results = concurrency_groups
+                .entry(result.concurrency)
+                .or_insert_with(HashMap::new)
+                .entry(result.endpoint.clone())
+                .or_insert_with(Vec::new);
+
+            endpoint_results.push((result.framework.clone(), result.metrics.req_per_sec));
         }
 
-        for ((framework, concurrency), endpoint_results) in temp_results {
-            if endpoint_results.len() == endpoints.len() {
-                let results_vec = concurrency_groups.entry(concurrency).or_default();
-
-                results_vec.push((framework, endpoint_results));
+        for endpoint_groups in concurrency_groups.values_mut() {
+            for results in endpoint_groups.values_mut() {
+                results.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
             }
-        }
-
-        for results in concurrency_groups.values_mut() {
-            results.sort_by(|a, b| {
-                let a_total: f64 = a.1.values().sum();
-                let b_total: f64 = b.1.values().sum();
-                b_total.partial_cmp(&a_total).unwrap()
-            });
         }
 
         (endpoints, concurrency_groups)
@@ -104,18 +98,11 @@ impl ResultsProcessor for DefaultResultsProcessor {
             println!("\n## Concurrency: {}\n", concurrency);
             println!("{}", self.generate_table_header(&endpoints));
 
-            if let Some(results) = concurrency_groups.get(&concurrency) {
-                for (rank, (framework, endpoint_results)) in results.iter().enumerate() {
-                    println!(
-                        "{}",
-                        self.format_row(
-                            rank + 1,
-                            framework,
-                            endpoint_results,
-                            &endpoints,
-                            concurrency
-                        )
-                    );
+            if let Some(endpoint_results) = concurrency_groups.get(&concurrency) {
+                let max_rank = endpoint_results.values().map(|v| v.len()).max().unwrap_or(0);
+
+                for rank in 1..=max_rank {
+                    println!("{}", self.format_row(rank, endpoint_results, &endpoints));
                 }
             }
         }
@@ -129,29 +116,21 @@ impl ResultsProcessor for DefaultResultsProcessor {
         writeln!(file, "- Date: {}", chrono::Local::now().format("%Y-%m-%d %H:%M:%S"))?;
         writeln!(file, "## Hardware Information\n{}\n", self.metrics_collector.hardware_info())?;
 
+        writeln!(file, "# Performance Rankings (Requests/sec)")?;
+
         let (endpoints, concurrency_groups) = self.process_results(results);
         let mut concurrencies: Vec<_> = concurrency_groups.keys().collect();
         concurrencies.sort();
-
-        writeln!(file, "# Performance Rankings (Requests/sec)")?;
 
         for &concurrency in concurrencies {
             writeln!(file, "\n## Concurrency: {}\n", concurrency)?;
             writeln!(file, "{}", self.generate_table_header(&endpoints))?;
 
-            if let Some(results) = concurrency_groups.get(&concurrency) {
-                for (rank, (framework, endpoint_results)) in results.iter().enumerate() {
-                    writeln!(
-                        file,
-                        "{}",
-                        self.format_row(
-                            rank + 1,
-                            framework,
-                            endpoint_results,
-                            &endpoints,
-                            concurrency
-                        )
-                    )?;
+            if let Some(endpoint_results) = concurrency_groups.get(&concurrency) {
+                let max_rank = endpoint_results.values().map(|v| v.len()).max().unwrap_or(0);
+
+                for rank in 1..=max_rank {
+                    writeln!(file, "{}", self.format_row(rank, endpoint_results, &endpoints))?;
                 }
             }
         }

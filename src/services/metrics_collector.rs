@@ -40,6 +40,7 @@ impl SystemMetricsCollector {
         )
     }
 
+    #[allow(dead_code)]
     pub fn cpu_cores(&self) -> usize {
         self.cpu_cores
     }

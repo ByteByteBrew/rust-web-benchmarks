@@ -1,0 +1,18 @@
+[package]
+name = "silent"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "silent"
+
+[dependencies]
+common = { path = "../common" }
+
+silent = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

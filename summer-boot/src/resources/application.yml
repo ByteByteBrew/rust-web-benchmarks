@@ -1,0 +1,11 @@
+server:
+    host: 127.0.0.1
+    port: 8080
+    context_path: /
+
+log:
+    level: off
+
+profiles:
+    active: dev
+    include: []

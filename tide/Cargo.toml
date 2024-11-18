@@ -1,0 +1,17 @@
+[package]
+name = "tide"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "tide"
+
+[dependencies]
+common = { path = "../common" }
+
+tide = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }

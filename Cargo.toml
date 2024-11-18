@@ -23,6 +23,11 @@ members = [
     "xitca-web",
     "ntex",
     "argan",
+    "nickel",
+    "oxidy",
+    "silent",
+    "summer-boot",
+    "tide"
 ]
 
 [profile.release]
@@ -91,6 +96,13 @@ graphul = "1.0.1"
 iron = "0.6.1"
 xitca-web = "0.6.2"
 argan = "0.1.2"
+
+silent = "1.5.0"
+summer-boot = "1.4.2"
+
+tide = "0.16.0"
+nickel = "0.11.0"
+oxidy = "0.5.0"
 
 [dependencies]
 tokio = { workspace = true }

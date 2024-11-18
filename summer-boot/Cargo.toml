@@ -1,0 +1,18 @@
+[package]
+name = "summer-boot"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "summer-boot"
+
+[dependencies]
+common = { path = "../common" }
+
+summer-boot = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

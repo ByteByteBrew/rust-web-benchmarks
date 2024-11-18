@@ -36,11 +36,6 @@ pub trait BenchmarkExecutor {
 }
 
 pub trait ResultsProcessor {
-    fn group_results<'a>(
-        &self,
-        results: &'a [BenchmarkResult],
-    ) -> Vec<((usize, String), Vec<&'a BenchmarkResult>)>;
-
     fn print_console_report(&self, results: &[BenchmarkResult]);
     fn generate_markdown_report(&self, results: &[BenchmarkResult]) -> Result<()>;
 }

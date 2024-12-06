@@ -1,0 +1,21 @@
+[package]
+name = "astra"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "astra"
+
+[dependencies]
+common = { path = "../common" }
+
+astra = { workspace = true }
+http = { workspace = true }
+mimalloc = { workspace = true }
+num_cpus = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

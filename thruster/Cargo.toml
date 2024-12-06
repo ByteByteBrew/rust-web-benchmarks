@@ -1,0 +1,18 @@
+[package]
+name = "thruster"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "thruster"
+
+[dependencies]
+common = { path = "../common" }
+
+thruster = { workspace = true, features = ["hyper_server"] }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

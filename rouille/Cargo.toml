@@ -1,0 +1,18 @@
+[package]
+name = "rouille"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "rouille"
+
+[dependencies]
+common = { path = "../common" }
+
+rouille = { workspace = true }
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

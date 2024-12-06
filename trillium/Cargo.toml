@@ -1,0 +1,20 @@
+[package]
+name = "trillium"
+authors.workspace = true
+publish.workspace = true
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "trillium"
+
+[dependencies]
+common = { path = "../common" }
+
+trillium = { workspace = true }
+trillium-router = "0.4.1"
+trillium-smol = "0.4.2"
+
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

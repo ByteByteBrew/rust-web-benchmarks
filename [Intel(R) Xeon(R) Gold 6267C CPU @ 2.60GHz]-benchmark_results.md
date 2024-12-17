@@ -2,7 +2,7 @@
 
 ## Test Configuration
 
-- Date: 2024-12-06 18:12:39
+- Date: 2024-12-17 15:46:04
 ## Hardware Information
 - CPU: Intel(R) Xeon(R) Gold 6267C CPU @ 2.60GHz (8 cores)
 - Memory: 32095 MB
@@ -13,88 +13,88 @@
 
 | Rank | /fortunes | /json | /plaintext |
 |------|-----------------|-----------------|-----------------|
-|    1 | may_minihttp    193245 | may_minihttp    187917 | actix-web    188033 |
-|    2 | ntex         183127 | actix-web    186755 | may_minihttp    187050 |
-|    3 | actix-web    182694 | ntex         186691 | ntex         186105 |
-|    4 | xitca-web    177393 | xitca-web    176142 | xitca-web    180461 |
-|    5 | ohkami       160092 | ohkami       165985 | ohkami       167675 |
-|    6 | argan        156252 | warp         157016 | argan        161157 |
-|    7 | warp         154844 | argan        154342 | warp         158436 |
-|    8 | thruster     153714 | thruster     154186 | viz          155978 |
-|    9 | viz          151390 | viz          151650 | thruster     155680 |
-|   10 | axum         149600 | axum         146765 | graphul      152396 |
-|   11 | graphul      147194 | poem         146643 | axum         151349 |
-|   12 | poem         144955 | graphul      146324 | poem         149203 |
-|   13 | salvo        143725 | salvo        145493 | salvo        146902 |
-|   14 | gotham       139161 | gotham       145071 | iron         144564 |
-|   15 | iron         138212 | iron         137659 | gotham       144215 |
-|   16 | saphir       135591 | astra        131375 | silent       135624 |
-|   17 | silent       132713 | silent       129940 | astra        133829 |
-|   18 | trillium     131259 | trillium     127703 | trillium     131166 |
-|   19 | astra        130689 | saphir       125024 | rocket       120994 |
-|   20 | rocket       117320 | rocket       120798 | saphir       118656 |
-|   21 | nickel       106213 | nickel        86562 | nickel        97561 |
-|   22 | oxidy         36930 | oxidy         37870 | oxidy         38198 |
-|   23 | rouille       19857 | rouille       20601 | rouille       19938 |
-|   24 | tide           1416 | summer-boot      1417 | tide           1418 |
-|   25 | summer-boot      1414 | tide           1413 | summer-boot      1417 |
+|    1 | may_minihttp    180446 | may_minihttp    178489 | ntex         183214 |
+|    2 | actix-web    177624 | ntex         177022 | actix-web    182856 |
+|    3 | ntex         175825 | actix-web    176735 | may_minihttp    179010 |
+|    4 | xitca-web    164402 | xitca-web    164309 | xitca-web    169858 |
+|    5 | ohkami       153471 | ohkami       152858 | ohkami       161474 |
+|    6 | thruster     147291 | warp         150396 | argan        150483 |
+|    7 | viz          145760 | argan        145584 | warp         149743 |
+|    8 | argan        145314 | thruster     145384 | thruster     147996 |
+|    9 | graphul      144737 | axum         144204 | axum         145692 |
+|   10 | warp         144272 | viz          141962 | viz          140926 |
+|   11 | poem         141260 | graphul      141190 | poem         140707 |
+|   12 | gotham       139625 | poem         140210 | graphul      140222 |
+|   13 | axum         138594 | gotham       139276 | gotham       140011 |
+|   14 | salvo        137280 | salvo        139164 | salvo        138473 |
+|   15 | saphir       136763 | iron         137065 | iron         137839 |
+|   16 | iron         134415 | trillium     128758 | saphir       136020 |
+|   17 | astra        126059 | saphir       127927 | trillium     128865 |
+|   18 | silent       122973 | astra        126971 | astra        127766 |
+|   19 | trillium     121824 | silent       121633 | silent       123767 |
+|   20 | rocket       115280 | rocket       116408 | rocket       121764 |
+|   21 | nickel        82766 | nickel        83345 | nickel        84068 |
+|   22 | oxidy         35188 | oxidy         35489 | oxidy         36867 |
+|   23 | rouille       19000 | rouille       19582 | rouille       20116 |
+|   24 | tide           1416 | tide           1417 | summer-boot      1418 |
+|   25 | summer-boot      1415 | summer-boot      1416 | tide           1415 |
 
 ## Concurrency: 256
 
 | Rank | /fortunes | /json | /plaintext |
 |------|-----------------|-----------------|-----------------|
-|    1 | ntex         207661 | ntex         210939 | may_minihttp    211404 |
-|    2 | may_minihttp    206480 | may_minihttp    207261 | ntex         210688 |
-|    3 | actix-web    202233 | actix-web    205032 | actix-web    207586 |
-|    4 | ohkami       197814 | ohkami       200843 | ohkami       204949 |
-|    5 | xitca-web    195745 | warp         190524 | xitca-web    196719 |
-|    6 | thruster     186835 | argan        190168 | argan        191826 |
-|    7 | warp         184386 | xitca-web    189985 | thruster     190222 |
-|    8 | argan        181915 | thruster     187201 | warp         189853 |
-|    9 | viz          178664 | viz          178877 | axum         184126 |
-|   10 | axum         174348 | poem         176253 | graphul      182569 |
-|   11 | graphul      173025 | axum         173769 | viz          182001 |
-|   12 | salvo        170984 | salvo        172270 | poem         175291 |
-|   13 | poem         166881 | graphul      172020 | salvo        172654 |
-|   14 | gotham       163700 | gotham       170001 | gotham       170567 |
-|   15 | saphir       163491 | trillium     152300 | trillium     163640 |
-|   16 | trillium     156005 | saphir       149643 | saphir       157923 |
-|   17 | silent       145281 | silent       146275 | silent       148188 |
-|   18 | rocket       129375 | iron         134273 | rocket       137165 |
-|   19 | astra        126971 | astra        133334 | astra        134715 |
-|   20 | iron         113454 | rocket       131976 | iron         105133 |
-|   21 | nickel        51442 | nickel        52067 | nickel        51649 |
-|   22 | oxidy         41880 | oxidy         40804 | oxidy         42043 |
-|   23 | rouille       18448 | rouille       19092 | rouille       18823 |
-|   24 | summer-boot      5642 | summer-boot      5640 | summer-boot      5656 |
-|   25 | tide           5595 | tide           5635 | tide           5624 |
+|    1 | ntex         196484 | ntex         200354 | ntex         206717 |
+|    2 | may_minihttp    193214 | may_minihttp    198526 | actix-web    205768 |
+|    3 | actix-web    191690 | actix-web    194978 | may_minihttp    200127 |
+|    4 | ohkami       186967 | xitca-web    189218 | ohkami       195495 |
+|    5 | xitca-web    185683 | ohkami       188855 | xitca-web    189427 |
+|    6 | argan        179058 | argan        179390 | warp         182763 |
+|    7 | thruster     177247 | warp         178986 | thruster     181278 |
+|    8 | warp         171588 | thruster     178476 | argan        180359 |
+|    9 | viz          171407 | axum         172253 | axum         178145 |
+|   10 | graphul      170183 | viz          170950 | viz          174972 |
+|   11 | axum         166827 | poem         169700 | graphul      169905 |
+|   12 | poem         165350 | graphul      169430 | poem         169651 |
+|   13 | gotham       163759 | gotham       165822 | gotham       167624 |
+|   14 | salvo        159109 | salvo        159664 | salvo        166194 |
+|   15 | saphir       157125 | saphir       153501 | saphir       162869 |
+|   16 | trillium     146039 | trillium     151474 | trillium     157096 |
+|   17 | silent       135295 | silent       132058 | rocket       137857 |
+|   18 | iron         127894 | rocket       128939 | silent       136314 |
+|   19 | rocket       126818 | astra        126210 | astra        126888 |
+|   20 | astra        125790 | iron         118390 | iron         102811 |
+|   21 | nickel       115831 | nickel        50048 | nickel        50346 |
+|   22 | oxidy         38704 | oxidy         38227 | oxidy         40678 |
+|   23 | rouille       17507 | rouille       18595 | rouille       18517 |
+|   24 | summer-boot      5650 | tide           5651 | summer-boot      5588 |
+|   25 | tide           5646 | summer-boot      5646 | tide           5570 |
 
 ## Concurrency: 512
 
 | Rank | /fortunes | /json | /plaintext |
 |------|-----------------|-----------------|-----------------|
-|    1 | ntex         212270 | ntex         213270 | ohkami       218507 |
-|    2 | ohkami       212166 | ohkami       209871 | ntex         217774 |
-|    3 | may_minihttp    205239 | may_minihttp    209534 | actix-web    215234 |
-|    4 | actix-web    204933 | actix-web    207460 | may_minihttp    214817 |
-|    5 | thruster     197561 | warp         200273 | thruster     202844 |
-|    6 | xitca-web    194884 | argan        199846 | xitca-web    201887 |
-|    7 | warp         192102 | thruster     196686 | argan        201774 |
-|    8 | argan        190562 | xitca-web    189096 | warp         199563 |
-|    9 | viz          184509 | viz          187893 | viz          194110 |
-|   10 | graphul      179338 | axum         184631 | axum         193838 |
-|   11 | salvo        177955 | poem         181264 | graphul      190589 |
-|   12 | axum         175592 | graphul      177892 | poem         187225 |
-|   13 | poem         175013 | salvo        177873 | gotham       182089 |
-|   14 | gotham       174257 | gotham       171874 | salvo        180729 |
-|   15 | saphir       172197 | saphir       159292 | saphir       171410 |
-|   16 | trillium     157248 | trillium     159097 | trillium     161796 |
-|   17 | silent       142405 | silent       143602 | silent       145976 |
-|   18 | rocket       130218 | astra        129895 | rocket       141399 |
-|   19 | nickel       129756 | rocket       128450 | astra        132060 |
-|   20 | astra        127740 | iron          55158 | iron          55066 |
-|   21 | iron          55208 | nickel        51766 | nickel        51374 |
-|   22 | oxidy         42405 | oxidy         40395 | oxidy         43142 |
-|   23 | rouille       18372 | rouille       18627 | rouille       18434 |
-|   24 | tide          11004 | summer-boot     10969 | summer-boot     11022 |
-|   25 | summer-boot     10880 | tide          10675 | tide          10996 |
+|    1 | may_minihttp    200869 | ntex         204055 | ntex         209000 |
+|    2 | ntex         199656 | actix-web    203429 | actix-web    208313 |
+|    3 | ohkami       198765 | ohkami       199857 | ohkami       205909 |
+|    4 | actix-web    196118 | may_minihttp    196746 | may_minihttp    203451 |
+|    5 | thruster     189404 | thruster     190496 | thruster     193530 |
+|    6 | xitca-web    188178 | argan        184030 | xitca-web    191372 |
+|    7 | argan        184464 | warp         183903 | warp         190759 |
+|    8 | warp         179912 | axum         179415 | argan        189823 |
+|    9 | viz          178772 | viz          178490 | axum         187744 |
+|   10 | axum         176517 | graphul      178387 | viz          184559 |
+|   11 | graphul      175860 | xitca-web    177460 | graphul      180391 |
+|   12 | poem         174277 | poem         175777 | poem         176863 |
+|   13 | gotham       168676 | gotham       173472 | salvo        174104 |
+|   14 | salvo        165989 | salvo        165775 | gotham       173206 |
+|   15 | saphir       161958 | saphir       161863 | saphir       168340 |
+|   16 | trillium     146130 | trillium     147793 | trillium     158212 |
+|   17 | silent       131186 | silent       129815 | silent       135799 |
+|   18 | rocket       129308 | rocket       127426 | rocket       134891 |
+|   19 | astra        123743 | astra        122511 | astra        128434 |
+|   20 | iron         116740 | nickel        92890 | nickel       117560 |
+|   21 | nickel        50371 | iron          53745 | iron          53064 |
+|   22 | oxidy         39115 | oxidy         39177 | oxidy         40942 |
+|   23 | rouille       17846 | rouille       17916 | rouille       17385 |
+|   24 | summer-boot     11135 | summer-boot     11010 | tide          11026 |
+|   25 | tide          10890 | tide          10809 | summer-boot     10782 |
